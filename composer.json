@@ -1,0 +1,16 @@
+{
+    "name": "walderlan/mapbox-bundle",
+    "description": "Abstraction api mapbox for symfony",
+    "type": "library",
+    "require": {
+        "guzzlehttp/psr7": "^1.6"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Walderlan Sena",
+            "email": "senawalderlan@gmail.com"
+        }
+    ],
+    "minimum-stability": "beta"
+}

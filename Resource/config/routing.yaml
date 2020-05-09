@@ -1,0 +1,5 @@
+customer_payment:
+  type: rest
+  prefix: /map
+  resource: App\Bundles\MapBox\Controller\GeocodeController
+  trailing_slash_on_root: false
