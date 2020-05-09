@@ -20,6 +20,11 @@ class OptimizedService implements OptimizedServiceInterface
         $this->optimizedTripRepository = $optimizedTripRepository;
     }
 
+    /**
+     * @param array $request
+     * @return array
+     * @throws \Exception
+     */
     public function getOptimizedTrip(array $request)
     {
         try {
@@ -31,21 +36,25 @@ class OptimizedService implements OptimizedServiceInterface
         $trip = json_decode($response);
 
         if (property_exists($trip, 'code')) {
-            return [
-              'locationOne' => [
-                  'name' => $trip->waypoints[0]->name,
-                  'location' => $trip->waypoints[0]->location
-              ],
-              'locationTwo' => [
+            return $this->formatTripObject($trip);
+        }
+        return [];
+    }
+
+    private function formatTripObject(\stdClass $trip)
+    {
+        return [
+            'locationOne' => [
+                'name' => $trip->waypoints[0]->name,
+                'location' => $trip->waypoints[0]->location
+            ],
+            'locationTwo' => [
                 'name'     => $trip->waypoints[1]->name,
                 'location' => $trip->waypoints[1]->location
-              ],
-              'trips' => [
-                  'duration' => number_format($trip->trips[0]->duration/60,0).' min'
-              ]
-            ];
-        }
-
-        return [];
+            ],
+            'trips' => [
+                'duration' => number_format($trip->trips[0]->duration/60,0).' min'
+            ]
+        ];
     }
 }
